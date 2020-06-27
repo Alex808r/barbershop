@@ -7,7 +7,10 @@
 $(function() {
   
   $('#color').simplecolorpicker();
-})
+  $.datetimepicker.setLocale('en');
+  $('#datetimepicker').datetimepicker()
+});
+
 
 </script>
 
@@ -26,7 +29,7 @@ $(function() {
 
   <div class="form-group">
     <label >Когда Вас ждать? </label>
-    <input type="text" class="form-control"  placeholder="Введите дату и время" name="user_date_visit" value="<%=@user_date_visit%>">
+    <input id="datetimepicker"type="text" class="form-control"  placeholder="Введите дату и время" name="user_date_visit" value="<%=@user_date_visit%>">
   </div>
 
   <div class="form-group">
