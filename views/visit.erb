@@ -32,9 +32,9 @@ $(function() {
   <div class="form-group">
     <label >Выберите мастера</label>
     <select class="form-control"  name = "selected_master">
-      <option>Виктор Петрович</option>
-      <option>Алексей Николаевич</option>
-      <option>Вадим Вадимыч</option>
+      <option <%= @master == 'Виктор В.' ? 'selected' : ''%>>Виктор В.</option>
+      <option <%= @master == 'Сергей Ц.' ? 'selected' : ''%>>Сергей Ц.</option>
+      <option <%= @master == 'Ульяна К.' ? 'selected' : ''%>>Ульяна К.</option>
     </select>
   </div>
 
