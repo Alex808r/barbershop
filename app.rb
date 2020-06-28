@@ -22,6 +22,18 @@ configure do
 			"barber" TEXT,
 			"color" TEXT
 		);'
+	db.execute 'CREATE TABLE IF NOT EXISTS 
+		"Barbers" 
+		(
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"barber" TEXT
+		);'
+	db.execute 'Insert into Barbers (barber) values ("Виктор В."),("Сергей Ц."),("Ульяна К.")'
+				#where not exists
+				#(select * from Barbers where barber = '1');'
+	#where not exists(select * from Barbers where barber="Виктор В."'
+	
+
 end
 
 get '/' do
@@ -41,7 +53,13 @@ get '/contacts' do
 end
 
 get '/showusers' do
-  erb ':contacts'
+	@rows = []
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	db.execute 'select*from Users order by id desc --' do |row|
+			@rows << "#{row['username']}, контактный телефон: #{row['phone']} записался на #{row['datestamp']} к #{row['barber']} на цвет #{row['color']}<br>"
+	end
+	erb :showusers
 end
 
 post '/visit' do
@@ -76,6 +94,7 @@ post '/visit' do
 	#File.open('./public/visit.txt', 'a'){|f| f.write("#{@user_name},#{@user_phone},#{@user_date_visit},#{@master}, #{@color}\n")}
 	erb :visit
 end
+
 
 
 
