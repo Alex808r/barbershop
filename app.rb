@@ -53,12 +53,9 @@ get '/contacts' do
 end
 
 get '/showusers' do
-	@rows = []
-	db = SQLite3::Database.new 'barbershop.db'
-	db.results_as_hash = true
-	db.execute 'select*from Users order by id desc --' do |row|
-			@rows << "#{row['username']}, контактный телефон: #{row['phone']} записался на #{row['datestamp']} к #{row['barber']} на цвет #{row['color']}<br>"
-	end
+	db = get_db
+	@results = db.execute 'select*from Users order by id desc'
+	
 	erb :showusers
 end
 
