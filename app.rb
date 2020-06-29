@@ -4,6 +4,19 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def is_barber_exists? db, name
+	db.execute('select * from Barbers where name=?',[name]).length > 0
+end
+
+def seed_db db, barbers
+
+	barbers.each do |barber|
+		if !is_barber_exists? db, barber
+			db. execute 'Insert into Barbers (name) values (?)',[barber] 
+		end
+	end
+end
+
 def get_db
 	db = SQLite3::Database.new 'barbershop.db'
 	db.results_as_hash = true
@@ -26,12 +39,10 @@ configure do
 		"Barbers" 
 		(
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
-			"barber" TEXT
+			"name" TEXT
 		);'
-	db.execute 'Insert into Barbers (barber) values ("Виктор В."),("Сергей Ц."),("Ульяна К.")'
-				#where not exists
-				#(select * from Barbers where barber = '1');'
-	#where not exists(select * from Barbers where barber="Виктор В."'
+ 
+	seed_db db, ['Виктор В.','Сергей Ц.','Ульяна К.']
 	
 
 end
@@ -55,7 +66,7 @@ end
 get '/showusers' do
 	db = get_db
 	@results = db.execute 'select*from Users order by id desc'
-	
+	   
 	erb :showusers
 end
 
