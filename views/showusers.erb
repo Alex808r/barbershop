@@ -2,16 +2,28 @@
 <form action="/showusers" method="post">
 
 
-<table class="table">
-	<% @results.each do |row| %>
+<table class="table table-striped">
+	<thead>
 		<tr>
-			<td><%=row['username']%></td>
-			<td><%=row['phone']%></td>
-			<td><%=row['datestamp']%></td>
-			<td><%=row['barber']%></td>
-			<td><%=row['color']%></td>
-		</tr>
-	<%end%>
+			<th>Имя</th>
+			<th>Телефон</th>
+			<th>Дата записи</th>
+			<th>Мастер</th>
+			<th>Цвет волос</th>
+		</tr>	
+	</thead>
+ 	
+ 	<body>	
+		<% @results.each do |row| %>
+			<tr>
+				<td><%=row['username']%></td>
+				<td><%=row['phone']%></td>
+				<td><%=row['datestamp']%></td>
+				<td><%=row['barber']%></td>
+				<td><%=row['color']%></td>
+			</tr>
+		<%end%>
+	</body>
 </table>
 
 
