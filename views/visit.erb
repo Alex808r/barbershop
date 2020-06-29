@@ -35,9 +35,9 @@ $(function() {
   <div class="form-group">
     <label >Выберите мастера</label>
     <select class="form-control"  name = "selected_master">
-      <option <%= @master == 'Виктор В.' ? 'selected' : ''%>>Виктор В.</option>
-      <option <%= @master == 'Сергей Ц.' ? 'selected' : ''%>>Сергей Ц.</option>
-      <option <%= @master == 'Ульяна К.' ? 'selected' : ''%>>Ульяна К.</option>
+      <% @list_of_barbers.each do |row| %>
+        <option <%= @master == row['name'] ? 'selected' : ''%>><%=row['name']%></option>
+      <%end%>
     </select>
   </div>
 
