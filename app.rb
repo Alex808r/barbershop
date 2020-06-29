@@ -104,7 +104,7 @@ post '/visit' do
 		values (?,?,?,?,?)' , [@user_name, @user_phone, @user_date_visit, @master,@color]
 
 	#File.open('./public/visit.txt', 'a'){|f| f.write("#{@user_name},#{@user_phone},#{@user_date_visit},#{@master}, #{@color}\n")}
-	erb :visit
+	erb "<h2>Спасибо за запись</h2>"
 end
 
 
